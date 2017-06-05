@@ -1,0 +1,48 @@
+﻿<Page
+    x:Class="Yixin.Atom.Rasp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Yixin.Atom.Rasp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel>
+            <TextBlock>
+            <Run Text="DHT温度："/>
+            <Run Text="{x:Bind Model.DhtTemp,Mode=OneWay}"/>
+            </TextBlock>
+            <TextBlock>
+            <Run Text="湿度："/>
+            <Run Text="{x:Bind Model.Humi,Mode=OneWay}"/>
+            </TextBlock>
+            <TextBlock>
+            <Run Text="压强"/>
+            <Run Text="{x:Bind Model.Press,Mode=OneWay}"/>
+            </TextBlock>
+            <TextBlock>
+            <Run Text="BMP温度"/>
+            <Run Text="{x:Bind Model.BmpTemp,Mode=OneWay}"/>
+            </TextBlock>
+            <TextBlock>
+            <Run Text="土壤湿度状态："/>
+            <Run Text="{x:Bind Model.Soil,Mode=OneWay}"/>
+            </TextBlock>
+            <TextBlock>
+            <Run Text="雨滴传感器状态："/>
+            <Run Text="{x:Bind Model.Rain,Mode=OneWay}"/>
+            </TextBlock>
+            <TextBlock>
+            <Run Text="烟雾气敏传感器状态："/>
+            <Run Text="{x:Bind Model.Pm,Mode=OneWay}"/>
+            </TextBlock>
+            <TextBlock>
+            <Run Text="更新时间："/>
+            <Run Text="{x:Bind Model.Time,Mode=OneWay}"/>
+            </TextBlock>
+            <Button Content="Update" Click="Button_Click"/>
+        </StackPanel>
+       
+    </Grid>
+</Page>

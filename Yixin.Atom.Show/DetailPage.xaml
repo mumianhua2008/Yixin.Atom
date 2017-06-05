@@ -1,0 +1,92 @@
+﻿<Page
+    x:Class="Yixin.Atom.Show.DetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Yixin.Atom.Show"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+     xmlns:g="using:Ailon.QuickCharts"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <ItemsPanelTemplate x:Key="HorizontalItemsPanelTemplate">
+            <VirtualizingStackPanel Orientation="Horizontal"
+                VerticalAlignment="Top"
+                ScrollViewer.HorizontalScrollMode="Enabled"
+                ScrollViewer.VerticalScrollMode="Disabled"/>
+        </ItemsPanelTemplate>
+
+    </Page.Resources>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="Assets/9ca9c0be624e9bd090a0212dcf263c47.jpg"/>
+        </Grid.Background>
+        <Button Content="返回" Click="Button_Click_2" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+        <StackPanel>
+            <Grid>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="按日期" Foreground="White"/>
+                    <Button Content="总体" Foreground="White"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="温度" Foreground="White"/>
+                    <Button Content="湿度" Foreground="White"/>
+                    <Button Content="大气压" Foreground="White"/>
+                </StackPanel>
+            </Grid>
+            <StackPanel Orientation="Horizontal">
+                <ComboBox x:Name="SelectType" Header="选择时间类型" Foreground="White" SelectionChanged="SelectType_SelectionChanged">
+                    <ComboBoxItem Content="按月"/>
+                    <ComboBoxItem Content="按日"/>
+                    <ComboBoxItem Content="按小时"/>
+                </ComboBox>
+                <Button Content="分析" Foreground="White" VerticalAlignment="Stretch" Width="80" Click="Button_Click_1"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" >
+                <ComboBox x:Name="SelectYear" SelectedIndex="0">
+                    <ComboBoxItem >2017</ComboBoxItem>
+                    <ComboBoxItem >2016</ComboBoxItem>
+                </ComboBox>
+                <ComboBox x:Name="SelectMonth" Visibility="Collapsed">
+                    <ComboBoxItem Content="1"/>
+                    <ComboBoxItem Content="2"/>
+                    <ComboBoxItem Content="3"/>
+                    <ComboBoxItem Content="4"/>
+                    <ComboBoxItem Content="5"/>
+                    <ComboBoxItem Content="6"/>
+                    <ComboBoxItem Content="7"/>
+                    <ComboBoxItem Content="8"/>
+                    <ComboBoxItem Content="9"/>
+                    <ComboBoxItem Content="10"/>
+                    <ComboBoxItem Content="11"/>
+                    <ComboBoxItem Content="12"/>
+                </ComboBox>
+                <CalendarDatePicker x:Name="SelectDay" Visibility="Collapsed"/>
+            </StackPanel>
+
+            <g:SerialChart x:Name="AtomChart" Height="400" DataSource="{x:Bind Model.AtomData}">
+                <g:SerialChart.Graphs>
+                    <g:LineGraph ValueMemberPath="Line" Title="{x:Bind Model.Top}"/>
+                    <g:LineGraph ValueMemberPath="Line2" Title="{x:Bind Model.Ava}"/>
+                    <g:LineGraph ValueMemberPath="Line3" Title="{x:Bind Model.Down}"/>
+                </g:SerialChart.Graphs>
+            </g:SerialChart>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="有害气体分布情况(天数)" HorizontalAlignment="Center" Foreground="White"/>
+                <TextBlock Text="下雨分布情况(天数)" HorizontalAlignment="Center" Grid.Column="1" Foreground="White"/>
+                <TextBlock Text="土壤干燥分布情况(天数)" HorizontalAlignment="Center" Grid.Column="2" Foreground="White"/>
+                <g:PieChart Grid.Column="0" Margin="0,100,0,0"  Height="200" Foreground="White" x:Name="Pie1" DataSource="{x:Bind Model.PmData}" TitleMemberPath="title" ValueMemberPath="value"/>
+                <g:PieChart Grid.Column="1" Margin="0,100,0,0" Foreground="White" x:Name="Pie2" DataSource="{x:Bind Model.RainData}" TitleMemberPath="title" ValueMemberPath="value"/>
+                <g:PieChart Grid.Column="2" Margin="0,100,0,0" Foreground="White" x:Name="Pie3" DataSource="{x:Bind Model.SoilData}" TitleMemberPath="title" ValueMemberPath="value"/>
+            </Grid>
+
+        </StackPanel>
+    </Grid>
+</Page>
